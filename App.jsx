@@ -28,10 +28,14 @@ function App() {
     'Buy groceries'
   ]);
 
+  const addTask = (task) => {
+    setTasks([...tasks, task]);
+  };
+
   return (
     <SafeAreaView>
+      <ToDoForm addTask={ addTask } />
       <ToDoList tasks={ tasks }/>
-      <ToDoForm />
     </SafeAreaView>
   );
 }
