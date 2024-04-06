@@ -4,8 +4,10 @@
  * @format
  */
 
-import ToDoForm from './components/ToDoForm';
-import ToDoList from './components/ToDoList';
+import ToDoForm from './src/components/ToDoForm';
+import ToDoList from './src/components/ToDoList';
+import HomeScreen from './src/components/HomeScreen';
+import AboutScreen from './src/components/AboutScreen';
 import React from 'react';
 import {useState} from 'react';
 import {
@@ -18,7 +20,8 @@ import {
   TextInput,
   Button
 } from 'react-native';
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -32,11 +35,19 @@ function App() {
     setTasks([...tasks, task]);
   };
 
+  const Stack = createNativeStackNavigator();
+
   return (
-    <SafeAreaView>
-      <ToDoForm addTask={ addTask } />
-      <ToDoList tasks={ tasks }/>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="About" component={AboutScreen} />
+      </Stack.Navigator>
+      {/* <SafeAreaView>
+        <ToDoForm addTask={ addTask } />
+        <ToDoList tasks={ tasks }/>
+      </SafeAreaView> */}
+    </NavigationContainer>
   );
 }
 
